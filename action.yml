@@ -1,0 +1,24 @@
+name: 'Fetch Latest Tag'
+description: 'A GitHub Action to fetch the latest tag using curl and jq'
+inputs:
+  owner:
+    description: 'Owner of the GitHub repository'
+    required: true
+  repo:
+    description: 'Name of the GitHub repository'
+    required: true
+outputs:
+  latest-tag:
+    description: 'The latest tag name'
+runs:
+  using: 'composite'
+  steps:
+    - name: Fetch Tags
+      id: fetch_tags
+      shell: bash
+      run: |
+        tags=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+                   -H "User-Agent: GitHub-Action" \
+                   "https://api.github.com/repos/${{ inputs.owner }}/${{ inputs.repo }}/tags" | jq -r '[.[] | select(.name | test("-rc") | not)] | .[].name')
+        latest_tag=$(echo "$tags" | head -n 1 || echo "No tags available")
+        echo "::set-output name=latest-tag::$latest_tag"
