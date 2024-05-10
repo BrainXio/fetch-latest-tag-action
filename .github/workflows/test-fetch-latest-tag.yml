@@ -1,0 +1,21 @@
+name: 'Test Fetch Latest Tag Docker Action'
+
+on: [push]
+
+jobs:
+  fetch-latest-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Fetch Latest Tag with Docker
+      id: fetch-latest-tag
+      uses: ghcr.io/brainxio/fetch-latest-tag:latest
+      with:
+        owner: 'octocat'
+        repo: 'Hello-World'
+
+    - name: Print Latest Tag
+      run: echo "Latest Tag: ${{ steps.fetch-latest-tag.outputs['latest-tag'] }}"
