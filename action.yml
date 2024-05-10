@@ -1,0 +1,23 @@
+name: 'Telegram Bot Action'
+description: 'Send messages to Telegram from GitHub Actions.'
+author: 'BrainXio'
+inputs:
+  bot_token:
+    description: 'Telegram Bot Token'
+    required: true
+  chat_id:
+    description: 'Telegram Chat ID'
+    required: true
+  message:
+    description: 'Message to send'
+    required: true
+  parse_mode:
+    description: 'Message format (Markdown or HTML)'
+    required: false
+    default: 'Markdown'
+runs:
+  using: 'docker'
+  image: 'ghcr.io/brainxio/fetch-latest-tag:latest'
+  args:
+    - ${{ inputs.owner }}
+    - ${{ inputs.repo }}
