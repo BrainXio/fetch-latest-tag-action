@@ -1,0 +1,20 @@
+name: 'Fetch Latest Tag Example'
+on: [push]
+
+jobs:
+  fetch-latest-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Fetch Latest Tag
+      id: fetch-latest-tag
+      uses: brainxio/fetch-latest-tag@feature/fetch-latest-tag
+      with:
+        owner: 'brainxio'
+        repo: 'fetch-latest-tag-action'
+
+    - name: Print Latest Tag
+      run: echo "Latest Tag: ${{ steps.fetch-latest-tag.outputs['latest-tag'] }}"
