@@ -11,7 +11,7 @@ jobs:
 
     - name: Fetch Latest Tag
       id: fetch-latest-tag
-      uses: brainxio/fetch-latest-tag@feature/fetch-latest-tag
+      uses: brainxio/fetch-latest-tag-action@feature/fetch-latest-tag
       with:
         owner: 'brainxio'
         repo: 'fetch-latest-tag-action'
