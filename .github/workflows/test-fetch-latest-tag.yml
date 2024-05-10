@@ -1,4 +1,5 @@
-name: 'Fetch Latest Tag Example'
+name: 'Test Fetch Latest Tag Action'
+
 on: [push]
 
 jobs:
@@ -7,14 +8,14 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Fetch Latest Tag
       id: fetch-latest-tag
-      uses: brainxio/fetch-latest-tag-action@feature/fetch-latest-tag
+      uses: brainxio/fetch-latest-tag@main
       with:
-        owner: 'brainxio'
-        repo: 'fetch-latest-tag-action'
+        owner: 'octocat'
+        repo: 'Hello-World'
 
     - name: Print Latest Tag
       run: echo "Latest Tag: ${{ steps.fetch-latest-tag.outputs['latest-tag'] }}"
